@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja Premium | Produtos Selecionados</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+        }
+        
+        .cart-icon {
+            position: relative;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #ff4757;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(to right, #f8f9fa, #e9ecef);
+            margin-bottom: 40px;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            max-width: 700px;
+            margin: 0 auto 25px;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .product-image {
+            height: 200px;
+            width: 100%;
+            background-color: #f1f3f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            padding: 20px;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .product-description {
+            color: #7f8c8d;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #6a11cb;
+            margin-bottom: 20px;
+        }
+        
+        .buy-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        .buy-btn:hover {
+            background: linear-gradient(to right, #5a0cb9, #1c6ae4);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.3);
+        }
+        
+        .buy-btn i {
+            margin-right: 8px;
+        }
+        
+        footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer-content p {
+            margin-bottom: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: #6a11cb;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .hero {
+                padding: 40px 20px;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-store"></i>
+                <span>LojaPremium</span>
+            </div>
+            <div class="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <div class="cart-count">0</div>
+            </div>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Produtos Selecionados Para Você</h1>
+            <p>Encontre os melhores produtos com qualidade garantida e entrega rápida. Todos selecionados especialmente para melhorar seu dia a dia.</p>
+        </div>
+    </section>
+    
+    <main class="container">
+        <div class="products-grid" id="products-container">
+            <!-- Produtos serão carregados aqui via JavaScript -->
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2023 LojaPremium. Todos os direitos reservados.</p>
+            <p>Esta é uma loja de afiliados. Todos os pedidos são processados pelos vendedores originais.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Produtos da loja - você pode editar estes dados facilmente
+        const products = [
+            {
+                id: 1,
+                name: "Fone de Ouvido Bluetooth",
+                description: "Som de alta qualidade com cancelamento de ruído ativo. Bateria de longa duração.",
+                price: "R$ 189,90",
+                image: "produto1.png", // Altere para o nome do seu arquivo PNG
+                affiliateLink: "https://exemplo.com/afiliado1" // Seu link de afiliado aqui
+            },
+            {
+                id: 2,
+                name: "Smartwatch Fitness",
+                description: "Monitor de saúde com GPS integrado, resistente à água e notificações inteligentes.",
+                price: "R$ 329,90",
+                image: "produto2.png", // Altere para o nome do seu arquivo PNG
+                affiliateLink: "https://exemplo.com/afiliado2" // Seu link de afiliado aqui
+            },
+            {
+                id: 3,
+                name: "Caixa de Som Portátil",
+                description: "Potente som stereo à prova d'água. Conectividade Bluetooth e entrada AUX.",
+                price: "R$ 219,90",
+                image: "produto3.png", // Altere para o nome do seu arquivo PNG
+                affiliateLink: "https://exemplo.com/afiliado3" // Seu link de afiliado aqui
+            },
+            {
+                id: 4,
+                name: "Tablet 10 Polegadas",
+                description: "Tela Full HD, processador rápido, 64GB de armazenamento e câmera dupla.",
+                price: "R$ 1.299,90",
+                image: "produto4.png", // Altere para o nome do seu arquivo PNG
+                affiliateLink: "https://exemplo.com/afiliado4" // Seu link de afiliado aqui
+            },
+            {
+                id: 5,
+                name: "Câmera de Ação 4K",
+                description: "Grava vídeos em 4K, à prova d'água e inclui acessórios para esportes.",
+                price: "R$ 459,90",
+                image: "produto5.png", // Altere para o nome do seu arquivo PNG
+                affiliateLink: "https://exemplo.com/afiliado5" // Seu link de afiliado aqui
+            },
+            {
+                id: 6,
+                name: "Teclado Mecânico Gamer",
+                description: "Switches azuis, iluminação RGB personalizável e teclas programáveis.",
+                price: "R$ 289,90",
+                image: "produto6.png", // Altere para o nome do seu arquivo PNG
+                affiliateLink: "https://exemplo.com/afiliado6" // Seu link de afiliado aqui
+            }
+        ];
+        
+        // Função para carregar os produtos na página
+        function loadProducts() {
+            const productsContainer = document.getElementById('products-container');
+            
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                
+                productCard.innerHTML = `
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/300x200?text=Produto+${product.id}'">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">${product.name}</h3>
+                        <p class="product-description">${product.description}</p>
+                        <div class="product-price">${product.price}</div>
+                        <a href="${product.affiliateLink}" target="_blank" class="buy-btn">
+                            <i class="fas fa-shopping-cart"></i> Comprar Agora
+                        </a>
+                    </div>
+                `;
+                
+                productsContainer.appendChild(productCard);
+            });
+        }
+        
+        // Simulação de carrinho de compras
+        let cartItems = 0;
+        const cartCount = document.querySelector('.cart-count');
+        const cartIcon = document.querySelector('.cart-icon');
+        
+        cartIcon.addEventListener('click', () => {
+            alert(`Você tem ${cartItems} itens no carrinho. Esta é uma demonstração - os links de afiliado abrem diretamente na página do produto.`);
+        });
+        
+        // Simular adição ao carrinho quando clicar nos botões de compra
+        document.addEventListener('click', function(e) {
+            if(e.target.closest('.buy-btn')) {
+                cartItems++;
+                cartCount.textContent = cartItems;
+                
+                // Em um caso real, você não redirecionaria imediatamente
+                // mas como são links de afiliado, o redirecionamento ocorrerá normalmente
+            }
+        });
+        
+        // Carregar os produtos quando a página carregar
+        document.addEventListener('DOMContentLoaded', loadProducts);
+    </script>
+</body>
+</html>
